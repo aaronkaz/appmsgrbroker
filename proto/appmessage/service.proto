@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package appmessage;
+
+service AppMessageService {
+    rpc GetClusterState(ClusterDiscoveryRequest) returns (ClusterDiscoveryResponse);
+    rpc RegisterNode(RegisterNodeRequest) returns (RegisterNodeResponse);
+    rpc StreamClusterState(stream ClusterDiscoveryRequest) returns (stream ClusterDiscoveryResponse);
+}
+
+message MessageConsumer {
+    string id = 1;
+    int32 active_subscribers = 2;
+}
+
+message ClusterNode {
+    string id = 1;
+    int64 started_at_epoch = 2;
+    bool is_leader = 3;
+    repeated MessageConsumer consumers = 4;
+    string address = 5;
+}
+
+message ClusterDiscoveryRequest {
+    string version_info = 1;
+    string response_nonce = 2;
+    string node_id = 3;
+}
+
+message ClusterDiscoveryResponse {
+    string version_info = 1;
+    string response_nonce = 2;
+
+    repeated ClusterNode nodes = 3;
+    ClusterNode reporting_node = 4;
+}
+
+message RegisterNodeRequest {
+    ClusterNode node = 1;
+}
+
+message RegisterNodeResponse {}

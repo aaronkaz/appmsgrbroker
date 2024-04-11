@@ -1,0 +1,16 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: appmessage
+    except:
+      - buf.build/googleapis/googleapis
+      - buf.build/bufbuild/protovalidate
+      - buf.build/grpc-ecosystem/grpc-gateway
+plugins:
+  - plugin: buf.build/grpc/go:v1.3.0
+    out: pkg
+    opt: paths=source_relative
+  - plugin: buf.build/protocolbuffers/go
+    out: pkg
+    opt: paths=source_relative
