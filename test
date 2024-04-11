@@ -1,0 +1,2 @@
+go run cmd/main.go
+go run cmd/main.go --port 5001 --nodes 127.0.0.1:5000

@@ -3,7 +3,6 @@ module appmsgbroker
 go 1.22.2
 
 require (
-	github.com/jimsnab/go-lane v1.19.0
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/pkg/errors v0.9.1
 	google.golang.org/grpc v1.63.2

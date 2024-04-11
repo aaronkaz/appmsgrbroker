@@ -28,6 +28,7 @@ const (
 )
 
 func main() {
+	log.SetOutput(os.Stdout)
 	flag.Parse()
 	log.Println("starting app....")
 	// log.Printf("envs -- MY_NODE_NAME = %s, MY_POD_NAME = %s, MY_POD_NAMESPACE = %s, MY_POD_IP = %s",
@@ -106,7 +107,7 @@ func run(ctx context.Context) error {
 	grpcServer := grpc.NewServer()
 	appmessage.RegisterAppMessageServiceServer(grpcServer, srv)
 
-	log.Println("starting grpc server...")
+	log.Println("starting grpc server... on port: ", *port)
 
 	return routine.Run(ctx, func(ctx context.Context) error {
 		return grpcServer.Serve(lis)

@@ -34,6 +34,8 @@ func (s *Server) GetClusterState(context.Context, *appmessage.ClusterDiscoveryRe
 		IsLeader: s.Leader.NodeId == s.SelfId,
 	}
 
+	log.Println("return state>>", resp)
+
 	return resp, nil
 }
 
